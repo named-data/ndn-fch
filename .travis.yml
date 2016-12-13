@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.5"
+install:
+  - virtualenv .python
+  - bash -c "source .python/bin/activate;
+             pip3 install -r requirements.txt;
+             pip3 install coveralls"
+before_script:
+  - cp config.dist.py config.py
+  - ./manage.py update_hubs
+  - ./manage.py update_geodb
+script:
+  - ./manage.py cov
+after_success:
+  coveralls
