@@ -1,0 +1,1 @@
+{% for hub in hubs %}{% if not loop.first %},{% endif %}{{ hub.host }}{% endfor %}

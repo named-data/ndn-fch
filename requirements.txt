@@ -1,0 +1,12 @@
+click==6.6
+coverage==4.2
+Flask==0.11.1
+Flask-Script==2.0.5
+geoip2==2.4.2
+itsdangerous==0.24
+Jinja2==2.8
+kdtree==0.15
+MarkupSafe==0.23
+maxminddb==1.2.2
+requests==2.12.3
+Werkzeug==0.11.11
