@@ -1,0 +1,9 @@
+.python
+.python-version
+.tmp
+__pycache__
+*.pyc
+*.coverage
+.DS_Store
+config.py
+
