@@ -32,7 +32,11 @@ To manually download geo-ip mapping and hub position databases:
 
 These database need to be periodically refreshed, e.g., using a daily/weekly cronjob
 
-    TBD
+    # update geoip database weekly
+    0 22 * * 1    /path/to/ndn-fch/manage.py update_geodb && touch /path/to/ndn-fch/app.wsgi
+
+    # update hubs information daily
+    0 23 * * *    /path/to/ndn-fch/manage.py update_hubs && touch /path/to/ndn-fch/app.wsgi
 
 ## Run the Application
 
@@ -40,10 +44,29 @@ These database need to be periodically refreshed, e.g., using a daily/weekly cro
 ./manage.py runserver
 ```
 
-So access the application at the address [http://localhost:5000/](http://localhost:5000/)
+So access the application at the address (http://localhost:5000/)
 
 > Want to specify a different port?
 
 > ```sh
 > $ ./manage.py runserver -h 0.0.0.0 -p 8080
 > ```
+
+## Configure `mod_wsgi` apache module
+
+```
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    ServerName ndn-fch.example.comf
+
+    WSGIProcessGroup ndn-fch.example.com
+    WSGIDaemonProcess ndn-fch.example.com processes=2 threads=15 display-name=%{GROUP}
+
+    WSGIScriptAlias / /path/to/ndn-fch/app.wsgi
+
+    <Directory /path/to/ndn-fch>
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>
+```

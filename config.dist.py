@@ -1,3 +1,6 @@
+import os
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+
 # Enable debugging
 # DEBUG = True
 
@@ -5,7 +8,7 @@
 GEODB_URL = 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz'
 
 # Local path to where the geo database will be downloaded
-GEODB_PATH = '.tmp/geodb.mmdb'
+GEODB_PATH = '%s/.tmp/geodb.mmdb' % BASEDIR
 
 # URL to NDN hub information
 HUBS_URL = 'http://ndnmap.arl.wustl.edu/json/geocode/'
@@ -25,7 +28,7 @@ HUBS_URL = 'http://ndnmap.arl.wustl.edu/json/geocode/'
 #     }
 
 # Local path to where the hub information will be downloaded
-HUBS_PATH = '.tmp/hubs.json'
+HUBS_PATH = '%s/.tmp/hubs.json' % BASEDIR
 
 # Default that is returned whenever the system cannot determine the location
 DEFAULT_LOCATION = (34.1340213, -118.3238652)
