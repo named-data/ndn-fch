@@ -39,7 +39,7 @@ def initializeState(appState):
     app.HUB_INDEX = kdtree.create([PointWithInfo(
         value['_real_position'] if '_real_position' in value else value['position'],
         {'name': value['name'], 'host': urllib.parse.urlparse(value['site']).hostname})
-        for key,value in hubList.items()])
+        for key,value in hubList.items() if value['fch-enabled'] != False])
 
 
 def validateCoordintate(lat, lon):

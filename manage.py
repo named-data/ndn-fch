@@ -49,6 +49,14 @@ app = ndn_fch.create("%s/config.py" % os.path.abspath(os.path.dirname(__file__))
 manager = flask_script.Manager(app)
 
 @manager.command
+def list_hubs():
+    """List the hub list"""
+    # urllib.request.urlretrieve(manager.app.config['HUBS_URL'], filename=manager.app.config['HUBS_PATH'])
+    for item in app.HUB_INDEX.inorder():
+        print(item.data)
+    return 0
+
+@manager.command
 def update_hubs():
     """Fetch/update the hub list"""
     urllib.request.urlretrieve(manager.app.config['HUBS_URL'], filename=manager.app.config['HUBS_PATH'])
