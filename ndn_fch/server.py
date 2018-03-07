@@ -35,7 +35,7 @@ def initializeState(appState):
 
     app.GEODB = geoip2.database.Reader(app.config['GEODB_PATH'])
 
-    hubList = json.load(open(app.config['HUBS_PATH']))
+    hubList = json.load(open(app.config['HUBS_PATH'], encoding="utf-8"))
     app.HUB_INDEX = kdtree.create([PointWithInfo(
         value['_real_position'] if '_real_position' in value else value['position'],
         {'name': value['name'], 'host': urllib.parse.urlparse(value['site']).hostname})
