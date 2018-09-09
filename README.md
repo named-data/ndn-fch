@@ -9,11 +9,12 @@ NDN-FCH is an HTTP-based service with a very simple API.
 
 - Requesting an NDN hub based on IP-location inference using [MaxMind GeoLite2 City database](http://www.maxmind.com)
 
-  Input: GET request `/[?k=N]`
+  Input: GET request `/[?k=N][&cap=wss]`
 
   Parameters:
 
   * `k` (value 1 to 10, default 1) to request `k` closest hubs.
+  * `cap=wss` to request a hub capable of secure WebSockets.
 
   Output: a comma-separated list of hostnames of the closest NDN hubs
 

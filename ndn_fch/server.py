@@ -35,11 +35,15 @@ def initializeState(appState):
 
     app.GEODB = geoip2.database.Reader(app.config['GEODB_PATH'])
 
-    hubList = json.load(open(app.config['HUBS_PATH'], encoding="utf-8"))
-    app.HUB_INDEX = kdtree.create([PointWithInfo(
-        value['_real_position'] if '_real_position' in value else value['position'],
-        {'name': value['name'], 'host': urllib.parse.urlparse(value['site']).hostname})
-        for key,value in hubList.items() if value['fch-enabled'] != False])
+    def makePoint(value):
+        return PointWithInfo(
+            value['_real_position'] if '_real_position' in value else value['position'],
+            {'name': value['name'], 'host': urllib.parse.urlparse(value['site']).hostname})
+
+    hubJson = json.load(open(app.config['HUBS_PATH'], encoding="utf-8"))
+    hubList = [ value for value in hubJson.values() if value['fch-enabled'] != False ]
+    app.HUB_INDEX = kdtree.create([makePoint(value) for value in hubList])
+    app.WSS_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ws-tls'] == True])
 
 
 def validateCoordintate(lat, lon):
@@ -80,7 +84,10 @@ def getClosestHub():
     except:
         return abort(403)
 
-    result = current_app.HUB_INDEX.search_knn(location, k)
+    index = current_app.HUB_INDEX
+    if request.args.get("cap", "") == "wss":
+        index = current_app.WSS_INDEX
+    result = index.search_knn(location, k)
     hubs = [point.data.info for point,distance in result]
     if "verbose" in request.args:
         return render_template("verbose.html", hubs=hubs)
