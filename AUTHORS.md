@@ -7,3 +7,4 @@ in NDN-FCH:
 
 - Gregory Liu
 - Alexander Afanasyev
+- Junxiao Shi
