@@ -11,7 +11,7 @@ GEODB_URL = 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mm
 GEODB_PATH = '%s/.tmp/geodb.mmdb' % BASEDIR
 
 # URL to NDN hub information
-HUBS_URL = 'http://ndnmap.arl.wustl.edu/json/geocode/'
+HUBS_URL = 'http://ndndemo.arl.wustl.edu/testbed-nodes.json'
 # Expected format: JSON
 # Expected structure:
 #

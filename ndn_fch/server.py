@@ -42,8 +42,8 @@ def initializeState(appState):
 
     hubJson = json.load(open(app.config['HUBS_PATH'], encoding="utf-8"))
     hubList = [ value for value in hubJson.values() if value['fch-enabled'] != False ]
-    app.HUB_INDEX = kdtree.create([makePoint(value) for value in hubList])
-    app.WSS_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ws-tls'] == True])
+    app.HUB_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ndn-up'] == True])
+    app.WSS_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ndn-up'] == True and value['ws-tls'] == True])
 
 
 def validateCoordintate(lat, lon):
