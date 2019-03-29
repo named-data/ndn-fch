@@ -20,10 +20,6 @@ import os
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
-# activate virtualenv
-activate_this = os.path.join(BASEDIR, "../.python/bin/activate_this.py")
-exec(open(activate_this).read(), {'__file__': activate_this})
-
 import unittest
 from flask_testing import TestCase
 

@@ -15,14 +15,6 @@ PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 NDN-FCH, e.g., in COPYING.md file.  If not, see <http://www.gnu.org/licenses/>.
 """
-import os
-
-BASEDIR = os.path.abspath(os.path.dirname(__file__))
-
-# activate virtualenv
-activate_this = os.path.join(BASEDIR, "../.python/bin/activate_this.py")
-exec(open(activate_this).read(), {'__file__': activate_this})
-
 import unittest
 
 from ndn_fch.point_with_info import PointWithInfo
