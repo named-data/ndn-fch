@@ -25,9 +25,9 @@ def create(configFile, name=__name__):
                 static_folder='../_static')
     app.config.from_pyfile(configFile)
 
-    try:
-        app.register_blueprint(server)
-    except:
-        print ("Cannot initialize application.  Make sure geoip and hub databases are initialized")
-        print ("    ./manage.py update_hubs && ./manage.py update_geodb")
+    #try:
+    app.register_blueprint(server)
+    #except:
+    #    print ("Cannot initialize application.  Make sure geoip and hub databases are initialized")
+    #    print ("    ./manage.py update_hubs && ./manage.py update_geodb")
     return app

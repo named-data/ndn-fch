@@ -40,11 +40,13 @@ def initializeState(appState):
             value['_real_position'] if '_real_position' in value else value['position'],
             {'name': value['name'], 'host': urllib.parse.urlparse(value['site']).hostname})
 
-    hubJson = json.load(open(app.config['HUBS_PATH'], encoding="utf-8"))
-    hubList = [ value for value in hubJson.values() if value['fch-enabled'] != False ]
-    app.HUB_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ndn-up'] == True])
-    app.WSS_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ndn-up'] == True and value['ws-tls'] == True])
-
+    try:
+        hubJson = json.load(open(app.config['HUBS_PATH'], encoding="utf-8"))
+        hubList = [ value for value in hubJson.values() if value['fch-enabled'] != False ]
+        app.HUB_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ndn-up'] == True])
+        app.WSS_INDEX = kdtree.create([makePoint(value) for value in hubList if value['ndn-up'] == True and value['ws-tls'] == True])
+    except:
+        hubJson = {}
 
 def validateCoordintate(lat, lon):
     try:
