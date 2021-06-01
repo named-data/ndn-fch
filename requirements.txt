@@ -21,5 +21,5 @@ kdtree==0.16
 markupsafe==1.1.1
 maxminddb==1.4.1
 requests==2.21.0
-urllib3==1.24.1           # via requests
+urllib3==1.26.5           # via requests
 werkzeug==0.15.1
